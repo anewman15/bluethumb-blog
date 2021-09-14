@@ -1,16 +1,10 @@
 h1 Bluethumb Blog Posts
 
-table
-  thead
-    tr
-      th
-      th
-      th
-
-  tbody
+div
+  div
     - @posts.each do |post|
-      tr
-        td = link_to 'Show', post
+      h2 = link_to post['title'], post_path(post['id'])
+
 
 br
 
