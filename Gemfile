@@ -37,6 +37,7 @@ group :development do
   gem 'listen', '~> 3.3'
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
   gem 'rack-mini-profiler', '~> 2.0'
+  gem 'rspec-rails'
 
   # Rubocop linter
   gem 'rubocop'
@@ -54,7 +55,6 @@ group :test do
   gem 'guard-rspec'
   gem 'launchy'
   gem 'rails-controller-testing'
-  gem 'rspec-rails'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers'
   gem 'spring-commands-rspec'
