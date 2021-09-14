@@ -27,6 +27,8 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'guard'
+  gem 'guard-rspec'
+  gem 'rspec-rails'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
@@ -37,7 +39,6 @@ group :development do
   gem 'listen', '~> 3.3'
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
   gem 'rack-mini-profiler', '~> 2.0'
-  gem 'rspec-rails'
 
   # Rubocop linter
   gem 'rubocop'
@@ -52,7 +53,6 @@ group :test do
   gem 'capybara', '>= 3.26'
 
   gem 'factory_bot_rails'
-  gem 'guard-rspec'
   gem 'launchy'
   gem 'rails-controller-testing'
   gem 'selenium-webdriver'
