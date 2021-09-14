@@ -1,0 +1,17 @@
+h1 Bluethumb Blog Posts
+
+table
+  thead
+    tr
+      th
+      th
+      th
+
+  tbody
+    - @posts.each do |post|
+      tr
+        td = link_to 'Show', post
+
+br
+
+= link_to 'New Post', new_post_path
