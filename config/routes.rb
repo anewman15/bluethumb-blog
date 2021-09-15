@@ -3,5 +3,5 @@ Rails.application.routes.draw do
     resources :comments, except: [:update, :destroy, :edit]
   end
 
-  root to: 'posts#index'
+  root to: 'pages#home'
 end
