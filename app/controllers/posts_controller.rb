@@ -16,18 +16,31 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
-
-    if @post.save
-      redirect_to @post, notice: 'Post was successfully created.'
-    else
+    begin
+      response = HTTParty.post("http://localhost:4000/posts")
+      if response.code == 201
+        @post = JSON.parse response.body
+        redirect_to posts_path, notice: 'Post created successfully!', status: :created
+      end
+    rescue StandardError
       render :new
     end
   end
 
   private
 
+  def post_options
+    {
+      body: {
+        post: {
+          title: params[:title],
+          body: params[:body]
+        }
+      }
+    }
+  end
+
   def post_params
-    params.fetch(:post, {})
+    params.require(:Post).permit(:title, :body)
   end
 end
