@@ -1,0 +1,42 @@
+
+.w-full.px-4.md:px-4.text-xl.text-gray-800.leading-normal style="font-family:Georgia,serif;"
+  .font-sans
+    h1.font-bold.font-sans.break-normal.text-blue-900.text-center.p-6.my-5.text-4xl Welcome to Bluethumb Blog
+
+    .my-5.text-base.md:text-sm.text-white.font-bold.text-center
+      = link_to 'Create a Post', new_post_path, class: 'bg-blue-400 text-lg py-2 px-8 rounded hover:bg-blue-500'
+
+    .container.bg-gray-200.my-6.p-12.rounded.relative
+      .absolute.top-0.right-0.bg-green-800.text-gray-100.p-3.opacity-60.uppercase Featured Post
+      h1.font-bold.font-sans.break-normal.text-gray-900.pt-6.pb-2.text-3xl.md:text-4xl
+        == link_to @post['title'], post_path(@post['id']), class: "text-green-700 hover:text-green-800"
+
+      p.text-sm.md:text-base.font-normal.text-blue-600
+        span.pr-2 Published on:
+        span = @post['created_at']
+
+      p.py-6.text-gray-600 = @post['body']
+
+      hr.border-b-2.border-gray-400.mb-8.mx-4/
+      .container.px-4
+        .font-sans.bg-gradient-to-b.from-green-100.to-gray-100.rounded-lg.shadow-xl.p-4.text-center
+          h2.font-bold.break-normal.text-xl.md:text-3xl.text-green-800 Follow this Post
+          h3.font-bold.break-normal.text-gray-600.text-sm.md:text-base Join the conversation and get latest updates
+          .w-full.text-center.pt-4.my-4
+            == link_to 'Follow', post_path(@post['id']), class: "bg-green-500 text-white text-base font-semibold tracking-wider uppercase px-12 py-4 rounded shadow hover:bg-green-400"
+      /! Author
+      .flex.w-full.items-center.font-sans.px-4.py-12
+        img.w-10.h-10.rounded-full.mr-4 alt=("Avatar of Author") src="http://i.pravatar.cc/300" /
+        .flex-1.px-2
+          p.text-base.font-bold.text-base.md:text-xl.leading-none.mb-2 Bulu Thumber
+          p.text-gray-600.text-xs.md:text-base
+            | Staff Writer at
+            a.px-1.text-green-500.no-underline.hover:underline href="#" Bluethumb Blog
+        .justify-end
+          button.bg-transparent.border.border-gray-500.hover:border-green-500.text-xs.text-gray-500.hover:text-green-500.font-bold.py-2.px-4.rounded-full Read More
+      /! /Author
+      /! Divider
+      hr.border-b-2.border-gray-400.mb-8.mx-4
+      .font-sans.flex.justify-end.content-center.px-4.pb-12
+        .text-left
+          == link_to 'See All Posts', posts_path, class: "break-normal text-base md:text-sm text-green-500 font-bold no-underline hover:underline"
