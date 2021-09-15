@@ -6,8 +6,8 @@
     .my-5.text-base.md:text-sm.text-white.font-bold.text-center
       = link_to 'Create a Post', new_post_path, class: 'bg-blue-400 text-lg py-2 px-8 rounded hover:bg-blue-500'
 
-    .container.bg-gray-200.my-6.p-12.rounded.relative
-      .absolute.top-0.right-0.bg-green-800.text-gray-100.p-3.opacity-60.uppercase Featured Post
+    .container.bg-gray-200.my-6.p-6.md:p-12.rounded.relative
+      .absolute.top-0.right-0.bg-green-800.text-gray-100.text-xs.p-2.opacity-60.uppercase Featured Post
       h1.font-bold.font-sans.break-normal.text-gray-900.pt-6.pb-2.text-3xl.md:text-4xl
         == link_to @post['title'], post_path(@post['id']), class: "text-green-700 hover:text-green-800"
 

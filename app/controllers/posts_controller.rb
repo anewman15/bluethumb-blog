@@ -1,7 +1,8 @@
 class PostsController < ApplicationController
   def index
     response = JSON.parse HTTParty.get('http://localhost:4000/posts').body
-    @posts = response['posts']
+    posts = response['posts']
+    @posts = posts.reverse
   end
 
   def show
@@ -17,11 +18,8 @@ class PostsController < ApplicationController
 
   def create
     begin
-      response = HTTParty.post("http://localhost:4000/posts")
-      if response.code == 201
-        @post = JSON.parse response.body
-        redirect_to posts_path, notice: 'Post created successfully!', status: :created
-      end
+      response = HTTParty.post("http://localhost:4000/posts", post_options)
+      redirect_to posts_path, notice: 'Post created successfully!' if response.code == 201
     rescue StandardError
       render :new
     end
@@ -33,8 +31,8 @@ class PostsController < ApplicationController
     {
       body: {
         post: {
-          title: params[:title],
-          body: params[:body]
+          title: post_params[:title],
+          body: post_params[:body]
         }
       }
     }
