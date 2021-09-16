@@ -1,7 +1,23 @@
-p#notice = notice
-h2 = @post['title']
-p = @post['body']
-div
-  - @comments.each do |comment|
-    h3 = comment['name']
-    p = comment['body']
+.container.my-6.p-4.md:px-6
+  .my-1.flex.justify-start.items-center.border-b.border-opacity-50
+    .my-1.mr-12
+      img.object-center.w-12.h-12.rounded-full.mr-12 alt=("Avatar of Author") src="http://i.pravatar.cc/300" /
+      h3.text-xl.md:font-bold.font-semilbold Bulu Thumber
+      p.text-xs.text-gray-500 = DateTime.parse(@post['created_at']).strftime("%A %H:%M, %d %b %Y")
+
+    h2.text-green-800.font-semibold.text-3xl.my-6 = @post['title']
+
+  p.my-6.pb-4.md:text-2xl.text-gray-800 = @post['body']
+
+  .my-4.border-t-4.border-opacity-70
+    h2.mt-4.px-4.py-2.text-2xl.font-bold.text-green-800 Comments
+    .px-4
+      - @comments.each do |comment|
+        .my-4.rounded-lg.border-2
+          .flex.flex-col.md:flex-row.justify-start.rounded-lg
+            .px-4.py-1.flex.justify-start.items-center.bg-gray-200.rounded-t-lg.md:rounded-t-none.md:rounded-l-lg
+              img.w-8.h-8.rounded-full.mr-2 alt=("commenter") src="http://i.pravatar.cc/300"
+              .my-1
+                h3.text-l.font-bold.text-green-800 = comment['name']
+                p.text-xs.text-gray-500 = "#{time_ago_in_words(DateTime.parse(@post['created_at']))} ago"
+            p.bg-white.p-4.rounded-b-lg.md:rounded-b-none.md:rounded-r-lg.flex-grow.text-gray-600 = comment['body']
