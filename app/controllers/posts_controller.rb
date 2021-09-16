@@ -1,15 +1,29 @@
 class PostsController < ApplicationController
   def index
-    response = JSON.parse HTTParty.get('http://localhost:4000/posts').body
-    posts = response['posts']
-    @posts = posts.reverse
+    @posts = []
+    begin
+      response = HTTParty.get('http://localhost:4000/posts')
+      posts = JSON.parse(response.body)['posts'] if response && response.code == 200
+      @posts = posts.reverse
+    rescue StandardError
+      redirect_to root_path, error: 'Something went wrong.'
+    end
   end
 
   def show
-    post = JSON.parse HTTParty.get("http://localhost:4000/posts/#{params[:id]}").body
-    @post = post
-    comments_response = JSON.parse HTTParty.get("http://localhost:4000/posts/#{params[:id]}/comments").body
-    @comments = comments_response['comments']
+    @post = {}
+    @comment = Comment.new
+    begin
+      post_response = HTTParty.get("http://localhost:4000/posts/#{params[:id]}")
+      comments_response = HTTParty.get("http://localhost:4000/posts/#{params[:id]}/comments")
+
+      if post_response && comments_response && post_response.code == 200 && comments_response.code == 200
+        @post = JSON.parse(post_response.body)
+        @comments = JSON.parse(comments_response.body)['comments']
+      end
+    rescue StandardError
+      redirect_to root_path, error: 'Something went wrong.'
+    end
   end
 
   def new
