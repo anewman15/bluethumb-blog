@@ -12,11 +12,11 @@
 
   <body class="bg-gray-100 font-sans leading-normal tracking-normal">
     <%= render 'layouts/navbar' %>
-    <div>
-      <p><%= flash[:notice] %></p>
-    </div>
     <main class="container w-full md:max-w-4xl mx-auto pt-20">
+      <%= render 'layouts/flash_messages' %>
+      
       <%= yield %>
+
     </main>
     <div class="fixed bottom-5 right-5">
       <%= link_to 'Create New Post', new_post_path, class: "bg-blue-400 text-lg text-gray-100 font-bold p-4 rounded-full hover:bg-blue-500" %>

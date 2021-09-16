@@ -1,0 +1,12 @@
+<div class="container">
+  <% if success.present? %>
+    <p class="text-green-500 text-center border my-4 p-4 rounded bg-green-100">
+      <%= success %>
+    </p>
+  <% end %>
+  <% if error.present? %>
+    <p class="text-red-500 text-center border my-4 p-4 rounded bg-red-100">
+      <%= error %>
+    </p>
+  <% end %>
+</div>
