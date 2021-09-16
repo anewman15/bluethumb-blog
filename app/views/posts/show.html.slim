@@ -9,7 +9,7 @@
 
   p.my-6.pb-4.md:text-2xl.text-gray-800 = @post['body']
 
-  .my-4.border-t-4.border-opacity-70
+  .my-8.border-t-4.border-opacity-70
     h2.mt-4.px-4.py-2.text-2xl.font-bold.text-green-800 Comments
     .px-4
       - @comments.each do |comment|
@@ -21,3 +21,21 @@
                 h3.text-l.font-bold.text-green-800 = comment['name']
                 p.text-xs.text-gray-500 = "#{time_ago_in_words(DateTime.parse(@post['created_at']))} ago"
             p.bg-white.p-4.rounded-b-lg.md:rounded-b-none.md:rounded-r-lg.flex-grow.text-gray-600 = comment['body']
+
+  .my-8.p-4
+    h2.py-2.text-l.font-bold.text-green-800 Join the conversation
+    .px-4.py-4.bg-gray-200.rounded-l
+      = form_for(@comment, url: post_comments_path(@post['id'])) do |f|
+        .my-1
+          .my-1
+            = f.label :name, class: "text-gray-800 text-sm font-bold"
+          .my-1
+            = f.text_field :name, class: "h-6 p-2 w-full border rounded"
+
+        .my-1
+          .my-1
+            = f.label :body, class: "text-gray-800 text-sm font-bold"
+          .my-1
+            = f.text_area :body, class: "h-30 p-2 w-full border rounded"
+
+        = f.submit 'Add Comment', class: "px-4 py-2 text-sm bg-green-800 hover:bg-green-700 text-gray-100 rounded"
