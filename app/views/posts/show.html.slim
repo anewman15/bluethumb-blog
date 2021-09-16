@@ -19,7 +19,7 @@
               img.w-8.h-8.rounded-full.mr-2 alt=("commenter") src="http://i.pravatar.cc/300"
               .my-1
                 h3.text-l.font-bold.text-green-800 = comment['name']
-                p.text-xs.text-gray-500 = "#{time_ago_in_words(DateTime.parse(@post['created_at']))} ago"
+                p.text-xs.text-gray-500 = "#{time_ago_in_words(DateTime.parse(comment['created_at']))} ago"
             p.bg-white.p-4.rounded-b-lg.md:rounded-b-none.md:rounded-r-lg.flex-grow.text-gray-600 = comment['body']
 
   .my-8.p-4

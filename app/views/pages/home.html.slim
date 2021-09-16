@@ -12,8 +12,8 @@
         == link_to @post['title'], post_path(@post['id']), class: "text-green-700 hover:text-green-800"
 
       p.text-sm.md:text-base.font-normal.text-blue-600
-        span.pr-2 Published on:
-        span = @post['created_at']
+        span.pr-2 Published
+        span = "#{time_ago_in_words(DateTime.parse(@post['created_at']))} ago"
 
       p.py-6.text-gray-600 = @post['body']
 
