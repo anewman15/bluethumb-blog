@@ -13,14 +13,22 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = 'Post'
+    @post = Post.new
   end
 
   def create
-    begin
-      response = HTTParty.post("http://localhost:4000/posts", post_options)
-      redirect_to posts_path, notice: 'Post created successfully!' if response.code == 201
-    rescue StandardError
+    @post = Post.new(post_params)
+    if @post.valid?
+      begin
+        response = HTTParty.post("http://localhost:4000/posts", post_options)
+        if response && response.code == 201
+          @post = JSON.parse(response.body)['post']
+          redirect_to posts_path, success: 'Post created successfully!'
+        end
+      rescue StandardError
+        redirect_to new_post_path, error: 'Something went wrong. Please try again.'
+      end
+    else
       render :new
     end
   end
@@ -39,6 +47,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:Post).permit(:title, :body)
+    params.require(:post).permit(:title, :body)
   end
 end
