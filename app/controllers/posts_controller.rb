@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   def index
     @posts = []
     begin
-      response = HTTParty.get('http://localhost:4000/posts')
+      response = HTTParty.get("#{@@host}/posts")
       posts = JSON.parse(response.body)['posts'] if response && response.code == 200
       @posts = posts.reverse
     rescue StandardError
@@ -14,8 +14,8 @@ class PostsController < ApplicationController
     @post = {}
     @comment = Comment.new
     begin
-      post_response = HTTParty.get("http://localhost:4000/posts/#{params[:id]}")
-      comments_response = HTTParty.get("http://localhost:4000/posts/#{params[:id]}/comments")
+      post_response = HTTParty.get("#{@@host}/posts/#{params[:id]}")
+      comments_response = HTTParty.get("#{@@host}/posts/#{params[:id]}/comments")
 
       if post_response && comments_response && post_response.code == 200 && comments_response.code == 200
         @post = JSON.parse(post_response.body)
@@ -34,7 +34,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     if @post.valid?
       begin
-        response = HTTParty.post("http://localhost:4000/posts", post_options)
+        response = HTTParty.post("#{@@host}/posts", post_options)
         if response && response.code == 201
           @post = JSON.parse(response.body)['post']
           redirect_to posts_path, success: 'Post created successfully!'
