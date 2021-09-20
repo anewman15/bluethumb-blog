@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
 
     if @comment.valid?
       begin
-        response = HTTParty.post("#{@@host}/posts/posts/#{params[:post_id]}/comments", comment_options)
+        response = HTTParty.post("#{@@host}/posts/#{params[:post_id]}/comments", comment_options)
         if response && response.code == 201
           @comment = JSON.parse(response.body)['comment']
           redirect_to post_path(params[:post_id]), success: 'Comment added.'
