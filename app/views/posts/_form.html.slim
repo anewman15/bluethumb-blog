@@ -4,13 +4,13 @@
       .my-2
         = f.label :title, class: "text-blue-500 text-xl font-bold"
       .my-2
-        = f.text_field :title, class: "h-8 p-2 w-full border rounded"
+        = f.text_field :title, placeholder: '*Required', class: "h-8 p-2 w-full border rounded"
 
     .my-6
       .my-2
         = f.label :body, class: "text-blue-500 text-xl font-bold"
       .my-2
-        = f.text_area :body, class: "h-40 p-2 w-full border rounded"
+        = f.text_area :body, placeholder: '*Required. Post text', class: "h-40 p-2 w-full border rounded"
 
     - if @post.errors.any?
       #error_explanation
